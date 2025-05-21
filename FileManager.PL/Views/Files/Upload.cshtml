@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Upload File";
+    var folder = ViewBag.Folder;
+}
+
+<h1>Upload File to @folder.Name</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Upload" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label for="file" class="control-label">Select File</label>
+                <input type="file" name="file" id="file" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="Description" class="control-label">Description</label>
+                <textarea name="Description" id="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+                <a asp-action="Index" asp-route-id="@folder.Id" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

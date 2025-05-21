@@ -1,0 +1,74 @@
+﻿@model FileManager.PL.Models.Location
+
+@{
+    ViewData["Title"] = "Location Details";
+}
+
+<h1>Location Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            City
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+    </dl>
+</div>
+
+<h3 class="mt-4">Folders in this Location</h3>
+
+@if (Model.Folders != null && Model.Folders.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var folder in Model.Folders)
+            {
+                <tr>
+                    <td>@folder.Name</td>
+                    <td>@folder.Description</td>
+                    <td>
+                        <a asp-controller="Folders" asp-action="Details" asp-route-id="@folder.Id" class="btn btn-info btn-sm">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No folders have been added to this location yet.</p>
+}
+
+<div class="mt-3">
+    <a asp-controller="Folders" asp-action="Create" asp-route-locationId="@Model.Id" class="btn btn-success">Add Folder</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" asp-route-cityId="@Model.CityId" class="btn btn-secondary">Back to List</a>
+</div>
