@@ -79,6 +79,8 @@ namespace FileManager.PL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,Address,CityId")] Location location)
         {
+            ModelState.Remove("City");
+            ModelState.Remove("Folders");
             if (ModelState.IsValid)
             {
                 var createdLocation = await _locationService.CreateLocationAsync(location);
@@ -125,6 +127,8 @@ namespace FileManager.PL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Address,CityId")] Location location)
         {
+            ModelState.Remove("City");
+            ModelState.Remove("Folders");
             if (id != location.Id)
             {
                 return NotFound();

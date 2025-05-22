@@ -32,19 +32,15 @@ namespace FileManager.PL.Services.Implementations
         {
             try
             {
-                // Add the new location to the repository
+                
                 await _locationRepository.AddAsync(location);
-
-                // Save changes to persist the new entity
                 await _locationRepository.SaveChangesAsync();
-
-                // Return the updated entity (with ID if auto-generated)
                 return location;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error creating location: {ex.Message}");
-                throw; // Re-throw to allow controller to handle errors
+                throw; 
             }
         }
 
